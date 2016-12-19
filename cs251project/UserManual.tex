@@ -1,0 +1,99 @@
+\documentclass[11pt]{report}
+\usepackage{outline}
+\usepackage{pmgraph}
+\usepackage[normalem]{ulem}
+\title{\textbf{Feeder User Manual}}
+\author{Enigma\\ Tanuj Kaza \\ Harsh Bansal \\ Bhavya Bahl \\}
+\date{\oldstylenums{05}/\oldstylenums{11}/\oldstylenums{16}}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\topmargin}{0in}
+\setlength{\headsep}{-.25in}
+\setlength{\textwidth}{6.5in}
+\setlength{\textheight}{8.5in}
+\setlength{\parindent}{1cm}
+
+\begin{document}
+\maketitle 
+\begin{outline}
+	\item Admin Interface
+    \begin{outline}
+    	\item The admin credentials are 
+    		\begin{itemize}
+    			\item admin login : admin
+				\item admin password : tanujuser
+    		\end{itemize}
+    	\item Once you login with the above mentioned credentials, there is a list of available courses displayed and the ability to add students in each of the courses. The list of students is imported from a csv file named 'student.csv' when the admin logs in. If there are any new students in the csv file, then even they will be added to the database
+The roll number is unique, so two students cannot have the same roll number
+    	\item The other functionality for the admin is adding courses. The fields in the add course form are mandatory and must be filled. The year field must be an integer(example : 2016). Apart from that Department is selected from the list of departments in IIT Bombay.
+    	\item Now the instructors must be selected for this course. There is a many to many mapping from instructors to course. One course can have multiple instructors(eg.MA105 and other freshmen courses, or consider an instructor and the Teaching Assistants(TA's) for the course. The TA's are treated as instructors in this app.). So all the instructors taking this course must be selected form the multiple select list.
+		\item If the add course form is not being submitted, it means that the course code has already been used before. Please try a different code. The format for course code [A-Z]{2}[0-9]{3}. 
+		\item Following this, the admin is prompted for midsem and endsem deadlines(It is not compulsory that the admin adds a midsem or endsem deadline and hence functionality has been provided where he can move directly to the feedback forms)
+		\item Some courses like CS101 in first year have multiple endsem and midsem examinations(Lab and theory courses). Hence functionality has been provided for the admin to add multiple midsem and endsem deadlines.
+		\item The midsem and endsem deadline buttons are toggle buttons and can be clicked if you realise you do not want to add a deadline
+		\item In the feedback form, there are some default objective questions(Questions which will have answers in the form of ratings from 1:5) and some subjective questions(Subjective Text Questions). 
+Don't leave the feedback deadline text field empty as it may throw an error
+		\item In addition to that, the admin can remove some of these questions, and add some more default questions which have been provided. In addition to this, the admin can also add some of his own objective and subjective questions(Not required, but he has been provided the functionality!). After all questions have been added, he has to add a feedback deadline and then he progresses to the endsemester form.(Where similar functionality is provided)
+		\item Once the feedback forms have been added, the admin is directed to a congratulatory page, after which he can either decide to go back to the home page or he can logout.
+		\item Apart from this we have a privacy policy and a terms of service too[Links given in the footer](Source has been cited). Do take a glance.
+	\end{outline}
+\end{outline}
+
+\newpage
+\begin{outline}
+	\item Instructor Interface
+    \begin{outline}
+    	\item Some Instructor credentials are 
+    		\begin{itemize}
+    			\item
+    		\begin{itemize}
+    			\item admin login : purushottam
+				\item admin password : puru123
+    		\end{itemize}
+    		\item
+    		\begin{itemize}
+    			\item admin login : damani	
+				\item admin password :	damani123
+    		\end{itemize}
+    		\item
+    		\begin{itemize}
+    			\item admin login : ajit	
+				\item admin password :	ajit123
+    		\end{itemize}
+    		\end{itemize}
+    	\item Once you login with any of the above mentioned credentials[Preferably purushottam and puru123], there are a list of courses being taken by the instructor and the ability to add assignmnets and feedback forms in each of the courses. The courses can be viewed by only the instructor taking the course and the Teaching Assistants for that course
+    	\item The assignments can be seen in the form of dealdines pending and those that have been completed, with the capability of editing the assignment fields(Deadlines,specifications.etc)
+    	\item Assignments can be added into each course in real time with the provision for adding deadlines and specifications
+		\item If the add assignment form is not being submitted, it means that some field has been left empty. Please try filling it properly.
+		\item The instructor can also view the feedback that has been submitted by the students, in interactive formats like graphs for objective questions(As well as in aggregate format) and the subjective results are also in aggregate format.[Check out purushottam's completed feedback form in the Data Structures and Algorithms Lab Course]
+		\item In the feedback form, there are some default objective questions(Questions which will have answers in the form of ratings from 1:5) and some subjective questions(Subjective Text Questions). 
+Don't leave the feedback deadline text field empty as it may throw an error
+		\item The objective questions have ratings from a scale of 1 to 5
+		\item In addition to that, the instructor can remove some of these questions, and add some more default questions which have been provided. In addition to this, the instructor can also add some of his own objective and subjective questions(Not required, but he has been provided the functionality!). After all questions have been added, he will be redirected to the course page.
+		\item The instructor can add as many feedback forms as desired.
+		\item We have provided facebook login for the instructors
+		\item Apart from this we have a privacy policy and a terms of service too[Links given in the footer](Source has been cited). Do take a glance.
+		\item You can click on the feeder brand name in the top left corner to be directed to the home page.
+	\end{outline}
+\end{outline}
+
+\newpage
+\begin{outline}
+	\item Student Interface
+    \begin{outline}
+    	\item Some Student credentials are 
+    		\begin{itemize}
+    			\item admin login : 150050109
+				\item admin password : harsh
+    		\end{itemize}
+ 		Multiple credentials are also present in the Django Database
+    	\item Once the student logs into the app, he sees a calendar view which has the different days which are colour coded on the basis of assignments and deadlines
+    	\item He is also able to see a feedback form
+    	\item A logout feature has been provided
+    	
+	\end{outline}
+\end{outline}
+
+
+
+\end{document}

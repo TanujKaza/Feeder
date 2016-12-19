@@ -1,0 +1,80 @@
+{% extends 'login/base.html' %}
+
+{% block content %}
+    <ul class="breadcrumb" id="breadcrumb">
+      <li><a href="/home">Home</a></li>
+      <li><a href="#">Feedback</a></li>
+    </ul>
+    {% if feedback %}
+    <div class="view-courses">
+    <center><h2>Pending Feedback</h2></center>
+    <table class='table table-bordered table-hover table-striped display' id='example'>
+    	<thead>
+        	<tr>
+         		<th style='width:300px;text-align:center;'>Feedback Title</th>
+         		<th style='width:200px;text-align:center;'>Form Deadline</th>
+            <th style='width:100px;text-align:center;'>Questions</th>
+        	</tr>
+    	</thead>
+    <tbody>
+    	{% for feed in feedback %}
+    	<tr class='gradeA'>
+			            <td><strong><span><center> {{ feed.feed_title }} </center></span></strong><br>
+		</td><td style='text-align:center;'><strong><span> {{ feed.form_deadline }} </span></strong><br>
+    </td><td><button class='add-button btn btn-success' style="margin-left:35%;" id = "{{ feed.id }}" onclick="view_questions(this.id)">View</button></td> </tr>
+      	{% endfor %}
+      	</tbody>
+             <tfoot>
+              <tr>
+             		<th style='width:300px;text-align:center;'>Feedback Title</th>
+                <th style='width:200px;text-align:center;'>Form Deadline</th>
+                <th style='width:100px;text-align:center;'>Questions</th>
+                   
+              </tr> 
+             </tfoot>
+           </table>
+           </div>
+  	{% else %}
+    	<p><center><h4>No Feedback Forms are Due by the Students</h4></center></p>
+  	{% endif %}
+
+    {% if feedback_c %}
+    <div class="view-courses">
+     <center><h2>Completed Feedback</h2></center>
+    <table class='table table-bordered table-hover table-striped display' id='example'>
+      <thead>
+          <tr>
+            <th style='width:300px;text-align:center;'>Feedback Title</th>
+            <th style='width:200px;text-align:center;'>Form Deadline</th>
+            <th style='width:100px;text-align:center;'>Results</th>
+          </tr>
+      </thead>
+    <tbody>
+      {% for feed in feedback_c %}
+      <tr class='gradeA'>
+                  <td><strong><center> {{ feed.feed_title }} </center></strong><br>
+    </td><td style='text-align:center;'><strong><span> {{ feed.form_deadline }} </span></strong><br>
+    </td><td><button class='add-button btn btn-success' style="margin-left:35%;" id = "{{ feed.id }}" onclick="view_results(this.id)">View</button></td> </tr>
+        {% endfor %}
+        </tbody>
+             <tfoot>
+              <tr>
+                <th style='width:300px;text-align:center;'>Feedback Title</th>
+                <th style='width:200px;text-align:center;'>Form Deadline</th>
+                <th style='width:100px;text-align:center;'>Results</th>
+              </tr> 
+             </tfoot>
+           </table>
+           </div>
+    {% else %}
+      <p><center><h4>No Feedback Forms have been completed by the Students</h4></center></p>
+    {% endif %}
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $("ul.nav.navbar-nav.navbar-right").css("display","inline");
+</script>
+{% endblock %}
+

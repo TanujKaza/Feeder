@@ -1,0 +1,6 @@
+repo: f19e0a2433abc72c041b028bc15995894be2ffa7
+node: d1d852f62085d3b1f9e15b7255c6c576160f6a9d
+branch: default
+latesttag: ReportLab_3_3_0
+latesttagdistance: 38
+changessincelatesttag: 38

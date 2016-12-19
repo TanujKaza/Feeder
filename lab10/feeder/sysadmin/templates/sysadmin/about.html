@@ -1,0 +1,24 @@
+{% extends 'sysadmin/base.html' %}
+
+{% block content %}
+<div class="container">
+	<h1><center>About</center></h1><br>
+	<p> <h4>Feeder was started by a group of IIT Bombay sophomores with a view to changing how courses function in their institute(and elsewhere). It is meant to bridge the communication gap between the students and the professors which in turn will improve the quality of the course being dished out. The instructors can receive constructive feedback on various aspects of the course and can thus dynamically change the ocurse structure for the better. The students too are sent reminders for the assignments and deadlines so that they do not miss out on important submissions and can plan their schedule more effectively.</h4></p>
+
+	<p><h4>I sincerely hope Feeder enhances your experience as a student, as a TA, and as a professor.</h4></p>
+</div>
+{% endblock %}
+
+{% block javascript %}
+{% if user.is_authenticated %}
+<script>
+    $("ul.nav.navbar-nav.navbar-right").css("display","inline");
+</script>
+{% else %}
+<script>
+    $("ul.nav.navbar-nav.navbar-right").css("display","none");
+</script>
+{% endif %}
+{% endblock %}
+
+

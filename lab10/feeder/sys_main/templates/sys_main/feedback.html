@@ -1,0 +1,191 @@
+{% extends 'sysadmin/base.html' %}
+
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+</head>
+
+<ul class="breadcrumb" id="breadcrumb">
+		<li><a href="sys_main:sysmain">Home</a></li>
+	</ul>
+
+	<div class="container">
+	<span class="pull-left"><h3>Objective Questions</h3></span>
+	<button class='button-feedback btn btn-success pull-right' onclick="set_objective();add_osquestion(this.id);" data-toggle="modal" data-target="#add_oquestion" id="{{feedback_id}}">Add Objective Question</button>
+
+			<table class='table table-bordered table-hover table-striped display' id='example'>
+		    	<thead>
+		        	<tr>
+		         		<th style='width:360px;text-align:center;'>Feedback Questions</th>
+			     		<th style='width:360px;text-align:center;'>Question Choices</th>
+	
+		        	</tr>
+		    	</thead>
+		    <tbody>
+		    <tr class='gradeA'> 
+			{% if feedback_e %}
+				<form action="/action_feed/{{feedback_id}}/" method="post">
+				{% csrf_token %}
+				<td>
+				{% for feedback in feedback_e %}
+					<label class="checkbox-inline"><input type="checkbox" name="feedback" value={{feedback.id}}>{{ feedback.question_text }}</label><br>
+				{% endfor %}
+					<input type="hidden" name="form_type" value="{{ success }}">
+					<input type="hidden" name="question_type" value="objective">
+					<button class = "btn btn-danger feedback-toggle" type ="submit" name="delete" value = "Delete">Remove</button>
+				</form>
+				</td>
+			{% else %}
+				<td> No current questions</td>
+			{% endif %}
+		
+			{% if feedback %}
+				<td>
+				<form action="/action_feed/{{feedback_id}}/" method="post">
+				{% csrf_token %}
+				{% for feedback in feedback %}
+					<label class="checkbox-inline"><input type="checkbox" name="feedback" value={{feedback.id}}>{{ feedback.question_text }}</label><br>
+				{% endfor %}
+					<input type="hidden" name="form_type" value="{{ success }}">
+					<input type="hidden" name="question_type" value="objective">
+					<button class = "btn btn-success feedback-toggle" type ="submit" name="add" value = "add">Add</button>
+				</form>
+				</td>
+			{% else %}
+				<td> No available questions</td>
+			{% endif %}
+	</tr>
+	</tbody>
+     <tfoot>
+      <tr>
+     		<th style='width:360px;text-align:center;'>Feedback Questions</th>
+     		<th style='width:360px;text-align:center;'>Question Choices</th>
+      </tr> 
+     </tfoot>
+   </table>
+   </div>
+
+	<div class="container" style="margin-top:2%;">
+	<span class="pull-left"><h3>Subjective Questions</h3></span>
+	<button class='button-feedback btn btn-success pull-right' onclick="set_subjective();add_osquestion(this.id);" data-toggle="modal" data-target="#add_oquestion" id="{{feedback_id}}">Add Subjective Question</button>
+
+			<table class='table table-bordered table-hover table-striped display' id='example'>
+		    	<thead>
+		        	<tr>
+		         		<th style='width:360px;text-align:center;'>Feedback Questions</th>
+			     		<th style='width:360px;text-align:center;'>Question Choices</th>
+			     		
+		        	</tr>
+		    	</thead>
+		    <tbody>
+		    <tr class='gradeA'> 
+			{% if feedback_es %}
+				<td>
+				<form action="/action_feed/{{feedback_id}}/" method="post">
+				{% csrf_token %}
+				{% for feedback in feedback_es %}
+					<label class="checkbox-inline"><input type="checkbox" name="feedback" value={{feedback.id}}>{{ feedback.question_text }}</label><br>
+				{% endfor %}
+					<input type="hidden" name="question_type" value="subjective">
+					<input type="hidden" name="form_type" value="{{ success }}">
+					<button class = "btn btn-danger feedback-toggle" type ="submit" name="delete" value = "Delete">Remove</button>
+				</form>
+				</td>
+			{% else %}
+				<td> No current questions</p></td>
+			{% endif %}
+
+			{% if feedbacks %}
+				<td>
+				<form action="/action_feed/{{feedback_id}}/" method="post">
+				{% csrf_token %}
+				{% for feedback in feedbacks %}
+					<label class="checkbox-inline"><input type="checkbox" name="feedback" value={{feedback.id}}>{{ feedback.question_text }}</label><br>
+				{% endfor %}
+					<input type="hidden" name="question_type" value="subjective">
+					<input type="hidden" name="form_type" value="{{ success }}">
+					<button class = "btn btn-success feedback-toggle" type ="submit" name="add" value = "add">Add</button>
+				</form>
+				</td>
+			{% else %}
+				<td> No available questions</td>
+			{% endif %}
+
+	</tr>
+	</tbody>
+     <tfoot>
+      <tr>
+     		<th style='width:360px;text-align:center;'>Feedback Questions</th>
+     		<th style='width:360px;text-align:center;'>Question Choices</th>
+     		
+      </tr> 
+     </tfoot>
+   </table>
+
+   		{% if not success %}
+   		<form action="/feedback/end/{{ feedback_id }}/" class="pull-right" style="margin-right:1%;" method="post">
+   		{% else %}
+   		<form action="/complete/{{ feedback_id }}/" class="pull-right" style="margin-right:1%;" method="post">
+   		{% endif %}
+   		{% csrf_token %}
+	   		<span><strong>Feedback Deadline:</strong></span>
+			<input class="dateinput input-sm" type="text" name='feed_deadline'><br><br>
+
+   {% if not success %}
+   <button type="submit" class="btn btn-success pull-right move_endsem" id="{{ feedback_id }}">Move to Endsem Feedback</button>
+   {% else %}
+   <button type="submit" class="btn btn-success pull-right finish" id="{{ feedback_id }}" onclick="finish(this.id)">Finish</button>
+   {% endif %}
+
+   	</form>
+	
+
+   </div>
+
+
+<div class="modal fade" id="add_oquestion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" name="2">
+  
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="padding-bottom:10%;">   
+          
+            <div class="modal-header">
+                <h4 class="modal-title pull-left" id="confirm_cancel" style="margin-top:1%;"><strong><center>ADD QUESTION</center></strong></h4>
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal" id="close_add_task">Close</button>
+            </div>
+            <br>
+             
+            <div class="col-sm-12 " align="center">
+            <form action="/add_oquestion/" method="post" id="add_oquestion_form">
+            {% csrf_token %}
+            	<strong class="pull-left" style="margin-bottom:1%;">Question:</strong>
+                <input class="form-control" type="text" name='question_text'>
+                <input type="hidden" value="" id="feedback_id" name='feedback_id'><br>
+                <input type="hidden" name="form_type" value="{{ success }}">
+                <input type="hidden" value="" id="feedback_type" name='feedback_type'>
+                <button type="submit" class="btn btn-success" id="add_question" value="Submit" >Add</button>
+                <br>
+            </form>
+            </div>
+            <br>
+          <br><br>
+
+        </div>
+      
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $("ul.nav.navbar-nav.navbar-right").css("display","inline");
+    $(function(){
+	    $(".dateinput").datepicker({
+	    	dateFormat: 'yy-mm-dd'
+	    });
+	});
+</script>
+{% endblock %}

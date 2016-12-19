@@ -1,0 +1,100 @@
+{% extends 'login/base.html' %}
+
+{% block content %}
+    <ul class="breadcrumb" id="breadcrumb">
+      <li><a href="/home">Home</a></li>
+      <li><a href="/view/feedback/{{ course_id }}">Feedback</a></li>
+      <li><a href="#">Results</a></li>
+    </ul>
+    <div class="container">
+    {% if feedback_o %}
+    <div class="view-courses">
+    <center><h2>Objective Questions</h2></center>
+    <table class='table table-bordered table-hover table-striped display' id='example'>
+    	<thead>
+        	<tr>
+         		<th style='width:200px;text-align:center;'>Question</th>
+            <th style='width:50px;text-align:center;'>Poor</th>
+            <th style='width:50px;text-align:center;'>Fair</th>
+            <th style='width:50px;text-align:center;'>Good</th>
+            <th style='width:50px;text-align:center;'>Very Good</th>
+            <th style='width:50px;text-align:center;'>Excellent</th>
+            <th style='width:50px;text-align:center;'>Total Responses</th>
+            <th style='width:100px;text-align:center;'>Graphical Results</th>
+        	</tr>
+    	</thead>
+    <tbody>
+    	{% for key, value in feedback_o.items %}
+    	<tr class='gradeA'>
+			            <td><strong>{{ key.question_text }}</strong></td>
+                    {% for key1,value1 in value.items %}
+                      <td class="feed-field">{{ key1.option_1 }}</td>
+                      <td class="feed-field">{{ key1.option_2 }}</td>
+                      <td class="feed-field">{{ key1.option_3 }}</td>
+                      <td class="feed-field">{{ key1.option_4 }}</td>
+                      <td class="feed-field">{{ key1.option_5 }}</td>
+                      <td class="feed-field"><strong>{{ value1 }}</strong></td>
+                      <td><button class='add-button btn btn-success' style="margin-left:35%;" id = "{{ key1.id }}" onclick="view_graph(this.id)">View</button></td>
+                    {% endfor %}
+                   </tr>
+      {% endfor %}
+      	</tbody>
+             <tfoot>
+              <tr>
+             		<th style='width:200px;text-align:center;'>Question</th>
+                <th style='width:50px;text-align:center;'>Poor</th>
+                <th style='width:50px;text-align:center;'>Fair</th>
+                <th style='width:50px;text-align:center;'>Good</th>
+                <th style='width:50px;text-align:center;'>Very Good</th>
+                <th style='width:50px;text-align:center;'>Excellent</th>
+                <th style='width:50px;text-align:center;'>Total Responses</th>
+                <th style='width:100px;text-align:center;'>Graphical Results</th>
+              </tr> 
+             </tfoot>
+           </table>
+           </div>
+  	{% else %}
+    	<p><center><h4>There are no objective questions</h4></center></p>
+  	{% endif %}
+    </div>
+
+    <div class="container">
+    {% if feedback_s %}
+    <div class="view-courses">
+    <center><h2>Subjective Questions</h2></center>
+    <table class='table table-bordered table-hover table-striped display' id='example'>
+      <thead>
+          <tr>
+            <th style='width:500px;text-align:center;'>Question</th>
+            <th style='width:100px;text-align:center;'>Results</th>
+          </tr>
+      </thead>
+    <tbody>
+      {% for feed in feedback_s %}
+      <tr class='gradeA'>
+                  <td><strong><span>{{ feed.question_text }}</span></strong><br>
+    </td><td><button class='add-button btn btn-success' style="margin-left:35%;" id = "{{  feed.id }}/{{ feedback_id }}" onclick="view_answers(this.id)">View</button></td> </tr>
+        {% endfor %}
+        </tbody>
+             <tfoot>
+              <tr>
+                <th style='width:500px;text-align:center;'>Question</th>
+                <th style='width:100px;text-align:center;'>Results</th>
+                   
+              </tr> 
+             </tfoot>
+           </table>
+           </div>
+    {% else %}
+      <p><center><h4>There are no subjective questions</h4></center></p>
+    {% endif %}
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $("ul.nav.navbar-nav.navbar-right").css("display","inline");
+</script>
+{% endblock %}
+

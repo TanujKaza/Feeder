@@ -1,0 +1,70 @@
+{% extends 'sysadmin/base.html' %}
+
+{% block content %}
+	<ul class="breadcrumb" id="breadcrumb">
+		<li><a href="/sysmain/">Home</a></li>
+		<li><a href="#">Students</a></li>
+	</ul>
+
+	{% if course %}
+		<div class="container">
+
+		<button type="submit" class="btn btn-success pull-right register-done" onclick="register_done()" style="margin-bottom:2%;">Finish</button>
+
+			<table class='table table-bordered table-hover table-striped display' id='example'>
+		    	<thead>
+		        	<tr>
+		         		<th style='width:360px;text-align:center;'>Enrolled Students</th>
+			     		<th style='width:360px;text-align:center;'>Available Students</th>
+					</tr>
+		    	</thead>
+		    <tbody>
+		    <tr class='gradeA'> 
+			{% if students_e %}
+				<td>
+				<form action="{% url 'sys_main:register' course.id %}" method="post">
+				{% csrf_token %}
+				{% for student in students_e %}
+					<label class="checkbox-inline"><input type="checkbox" name="students" value={{student.roll_number}} />{{student}}</label><br>
+				{% endfor %}
+					<button class = "btn btn-danger students-toggle" type ="submit" name="delete" value = "Delete">Remove</button>
+				</form>
+				</td>
+			{% else %}
+				<td><center> No students are enrolled in the course </center></td>
+			{% endif %}
+
+			{% if students %}
+				<td>
+				<form action="{% url 'sys_main:register' course.id %}" method="post">
+				{% csrf_token %}
+				{% for student in students %}
+					<label class="checkbox-inline"><input type="checkbox" name="students" value={{student.roll_number}} />{{student}}</label><br>
+				{% endfor %}
+					<button class = "btn btn-success students-toggle" type ="submit" name="add" value = "add">Add</button>
+				</form>
+				</td>
+			{% else %}
+				<td><center> No students are left to be registered </center></td>
+			{% endif %}
+			</tr>
+			</tbody>
+		     <tfoot>
+		      <tr>
+		     		<th style='width:360px;text-align:center;'>Enrolled Students</th>
+			     	<th style='width:360px;text-align:center;'>Available Students</th>
+		      </tr> 
+		     </tfoot>
+		    </table>
+
+		<button type="submit" class="btn btn-success pull-right register-done" onclick="register_done()" style="margin-bottom:10%;">Finish</button>
+
+   		</div>
+	{% endif %}
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $("ul.nav.navbar-nav.navbar-right").css("display","inline");
+</script>
+{% endblock %}

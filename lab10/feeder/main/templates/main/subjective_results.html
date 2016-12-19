@@ -1,0 +1,42 @@
+{% extends 'login/base.html' %}
+
+{% block content %}
+    <ul class="breadcrumb" id="breadcrumb">
+      <li><a href="/home">Home</a></li>
+      <li><a href="/view/feedback/{{ course_id }}/">Feedback</a></li>
+      <li><a href="/view/results/{{ feedback_id }}/">Results</a></li>
+      <li><a href="#">Questions</a></li>
+    </ul>
+
+<div class="container" style="margin-bottom:10%;">
+<h3 style="margin-bottom:-4%;margin-left:1.5%;">{{ feedback.feed_title }}</h3>
+<div class="container">
+    <div class="row" id="sign-card">
+        <div class="col-md-6">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ feedback_q.question_text }}</h3>
+                </div>
+                <div class="panel-body">
+                  {% if feedback_a %}
+                      <ul>
+                      {% for feed in feedback_a %}
+                        <li>{{ feed.answer_text }}</li>
+                      {% endfor %}
+                      </ul>
+                  {% else %}
+                      No students answered this question in the feedback form.
+                  {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $("ul.nav.navbar-nav.navbar-right").css("display","inline");
+</script>
+{% endblock %}

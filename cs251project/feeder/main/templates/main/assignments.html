@@ -1,0 +1,87 @@
+{% extends 'login/base.html' %}
+
+{% block content %}
+    <ul class="breadcrumb" id="breadcrumb">
+      <li><a href="/home">Home</a></li>
+      <li><a href="#">Assignments</a></li>
+    </ul>
+    {% if assignments %}
+    <div class="view-courses">
+    <center><h2>Pending Deadlines</h2></center>
+    <table class='table table-bordered table-hover table-striped display' id='example'>
+    	<thead>
+        	<tr>
+         		<th style='width:200px;text-align:center;'>Assignment Name</th>
+         		<th style='width:300px;text-align:center;'>Assignment Text</th>
+         		<th style='width:200px;text-align:center;'>Assignment Deadline</th>
+            <th style='width:100px;text-align:center;'>Edit</th>
+        	</tr>
+    	</thead>
+    <tbody>
+    	{% for assignment in assignments %}
+    	<tr class='gradeA'>
+			            <td><strong><span style='border-bottom: 1px solid black;'> {{ assignment.ass_name }} </span></strong><br>
+		</td><td><strong><span> {{ assignment.ass_text }} </span></strong><br>
+    </td> <td style='text-align:center;'><strong><span> {{ assignment.ass_deadline }} </span></strong><br>
+    </td><td><button class='add-button btn btn-success' style="margin-left:35%;" id = "{{ assignment.id }}" onclick="edit_ass(this.id)">Edit</button></td> </tr>
+      	{% endfor %}
+      	</tbody>
+             <tfoot>
+              <tr>
+             		<th style='width:200px;text-align:center;'>Assignment Name</th>
+                <th style='width:300px;text-align:center;'>Assignment Text</th>
+                <th style='width:200px;text-align:center;'>Assignment Deadline</th>
+                <th style='width:100px;text-align:center;'>Edit</th>
+                   
+              </tr> 
+             </tfoot>
+           </table>
+           </div>
+  	{% else %}
+    	<p>No Assignments are Due by the Students</p>
+  	{% endif %}
+
+    {% if assignments_c %}
+    <div class="view-courses">
+    <center><h2>Completed Deadlines</h2></center>
+    <table class='table table-bordered table-hover table-striped display' id='example'>
+      <thead>
+          <tr>
+            <th style='width:200px;text-align:center;'>Assignment Name</th>
+            <th style='width:300px;text-align:center;'>Assignment Text</th>
+            <th style='width:200px;text-align:center;'>Assignment Deadline</th>
+            <th style='width:100px;text-align:center;'>Edit</th>
+          </tr>
+      </thead>
+    <tbody>
+      {% for assignment in assignments_c %}
+      <tr class='gradeA'>
+                  <td><strong><span style='border-bottom: 1px solid black;'> {{ assignment.ass_name }} </span></strong><br>
+    </td><td><strong><span> {{ assignment.ass_text }} </span></strong><br>
+    </td> <td style='text-align:center;'><strong><span> {{ assignment.ass_deadline }} </span></strong><br>
+    </td><td><button class='add-button btn btn-success' style="margin-left:35%;" id = "{{ assignment.id }}" onclick="edit_ass(this.id)">Edit</button></td> </tr>
+        {% endfor %}
+        </tbody>
+             <tfoot>
+              <tr>
+                <th style='width:200px;text-align:center;'>Assignment Name</th>
+                <th style='width:300px;text-align:center;'>Assignment Text</th>
+                <th style='width:200px;text-align:center;'>Assignment Deadline</th>
+                <th style='width:100px;text-align:center;'>Edit</th>
+                   
+              </tr> 
+             </tfoot>
+           </table>
+           </div>
+    {% else %}
+      <p>No Assignments Have been completed</p>
+    {% endif %}
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $("ul.nav.navbar-nav.navbar-right").css("display","inline");
+</script>
+{% endblock %}
+

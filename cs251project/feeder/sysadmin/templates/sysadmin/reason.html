@@ -1,0 +1,50 @@
+{% extends 'sysadmin/base.html' %}
+
+{% block content %}
+<div class="container">
+<div class="initial">
+<h3>Why should you use Feeder?</h3>
+<h4>Feeder is a free platform for instructors to efficiently manage and run courses. Students can post feedback for running courses and view course deadlines. Instructors can also post feedback questions, view results and improve the quality of education<h4>
+</div>
+<br>
+<div class="initial">
+<h3>Why Feeder Works?</h3>
+<h4>It starts with students contributing. Feeder gives students anonymity options to encourage everyone—even shy students—to post feedback. Optimal Feedback and deadlines let instructors push the class in the right direction.</h4>
+</div>
+<br>
+<div class="initial">
+<h3>Will Feeder always stay free?</h3>
+<h4>Feeder is and will stay free to instructors and students. We started
+the application on the belief that nothing should come in the way of
+learning. We continue to believe that. We also believe in protecting
+our user’s information, and would never sell it or do anything to
+betray your trust.</h4>
+</div>
+<br>
+<div class="initial">
+<h3>Why Feeder Works?</h3>
+<h4>It starts with students contributing. Feeder gives students anonymity options to encourage everyone—even shy students—to post feedback. Optimal Feedback and deadlines let instructors push the class in the right direction.</h4>
+</div>
+<br>
+<div class="initial">
+<h3>Is there a mobile app?</h3>
+<h4>Our Android App helps the students stay connected with the class. Keep up with class alerts by following along with the application notifications.</h4>
+</div>
+<br>
+<br>
+<br>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+{% if user.is_authenticated %}
+<script>
+    $("ul.nav.navbar-nav.navbar-right").css("display","inline");
+</script>
+{% else %}
+<script>
+    $("ul.nav.navbar-nav.navbar-right").css("display","none");
+</script>
+{% endif %}
+{% endblock %}

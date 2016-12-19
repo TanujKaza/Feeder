@@ -1,0 +1,77 @@
+{% extends 'login/base.html' %}
+
+
+{% block content %}
+<head>
+{{form.media}}
+</head>
+<div class="container">
+    <div class="row" id="edit-card">
+        <div class="col-md-6 col-md-offset-4">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="panel-title">Change Assignment</h3>
+                </div>
+                <div class="panel-body">
+                    <form action="/save_ass/{{ assignment_id }}/" method="POST">
+{% csrf_token %}        <table class="user-table">
+                            <tr>
+                                <td class="edit-field">{{ form.ass_name.label_tag }}</td>
+                                <td class="edit-field">{{ form.ass_name }}</td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="edit-field">{{ form.ass_text.label_tag }}</td>
+                                <td class="edit-field">{{ form.ass_text }}</td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="edit-field">{{ form.ass_deadline.label_tag }}</td>
+                                <td class="edit-field">{{ form.ass_deadline }}</td>
+                            </tr>
+                        </table>
+
+                        <input type="hidden" id="assignment-id_del" value="{{ assignment_id }}">
+                            <button class='save-assignment btn btn-success' id="{{ assignment_id }}">Save</button>
+
+                        </form>
+
+                            <button class='save-assignment btn btn-danger' data-toggle="modal" data-target="#delete_assignment">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="delete_assignment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" name="2" style="top:0px !important; overflow:scroll;">
+  
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">   
+          
+            <div class="modal-header">
+                <h4 class="modal-title" id="confirm_deletion"><strong><center>ARE YOU SURE ?</center></strong></h4>
+            </div>
+            <br>
+             
+            <div class="col-sm-12 " align="center">
+              <button type="button" class="btn btn-success" id="delete_yes" data-dismiss="modal" onclick="delete_ass()">Yes</button>
+              <button type="button" class="btn btn-danger" id="delete_no" data-dismiss="modal" style="margin-left:50px;">No</button>
+            </div>
+            <br>
+          <br><br>
+
+        </div>
+      
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $("ul.nav.navbar-nav.navbar-right").css("display","inline");
+    $(function(){
+	    $(".dateinput").datepicker();
+	});
+</script>
+{% endblock %}

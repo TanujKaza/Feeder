@@ -1,0 +1,16 @@
+{% extends 'sysadmin/base.html' %}
+
+
+{% block content %}
+<div class="container">
+<h2><center>Congratulations!</center></h2>
+<span><h3>You have successfully added the course '{{ course.course_name }}'</h3></span>
+<span> <h3>Continue on to the <a href='/sysmain/'>Home Page</a> to view all the courses and related information.</h3></span>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $("ul.nav.navbar-nav.navbar-right").css("display","inline");
+</script>
+{% endblock %}
