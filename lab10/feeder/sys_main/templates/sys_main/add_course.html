@@ -1,0 +1,18 @@
+{% extends 'sysadmin/base.html' %}
+
+
+{% block content %}
+<form action="{% url 'sys_main:addCourse' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_table }}
+    <input type="submit" value="Submit" />
+</form>
+
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $("ul.nav.navbar-nav.navbar-right").css("display","inline");
+</script>
+{% endblock %}

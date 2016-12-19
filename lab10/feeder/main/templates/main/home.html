@@ -1,0 +1,44 @@
+{% extends 'login/base.html' %}
+
+{% block content %}
+	<ul class="breadcrumb" id="breadcrumb">
+		<li><a href="#">Home</a></li>
+	</ul>
+    {% if courses %}
+    <div class="view-courses">
+    <table class='table table-bordered table-hover table-striped display' id='example'>
+    	<thead>
+        	<tr>
+         		<th style='text-align:center;'>Course Name</th>
+         		<th style='width:200px;text-align:center;'>Assignments</th>
+         		<th style='width:200px;text-align:center;'>Feedback</th>
+        	</tr>
+    	</thead>
+    <tbody>
+    	{% for course in courses %}
+    	<tr class='gradeA'>
+			            <td><strong><span style='border-bottom: 1px solid black;'> {{ course.course_name }} </span></strong><br>
+		</td><td> <button class='view-button view-feed btn btn-success' id = "{{ course.id }}" onclick="view_ass(this.id)">View</button><button class='add-button btn btn-success' id = "{{ course.id }}" onclick="add_ass(this.id)">Add</button></td> <td><button class='view-button btn btn-success'>View</button><button class='add-button btn btn-success'>Add</button></td> </tr>
+      	{% endfor %}
+      	</tbody>
+             <tfoot>
+              <tr>
+         		<th style='text-align:center;'>Course Name</th>
+         		<th style='width:200px;text-align:center;'>Assignments</th>
+         		<th style='width:200px;text-align:center;'>Feedback</th>
+               
+              </tr> 
+             </tfoot>
+           </table>
+           </div>
+  	{% else %}
+    	<p>No Courses are available.</p>
+  	{% endif %}
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $("ul.nav.navbar-nav.navbar-right").css("display","inline");
+</script>
+{% endblock %}
+

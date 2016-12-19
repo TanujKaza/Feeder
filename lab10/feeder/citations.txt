@@ -1,0 +1,2 @@
+http://blog.narenarya.in/right-way-django-authentication.html
+http://stackoverflow.com/questions/1450463/django-datetimewidget-not-showing-up

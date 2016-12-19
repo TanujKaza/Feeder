@@ -1,0 +1,22 @@
+{% extends 'sysadmin/base.html' %}
+
+{% block content %}
+  Click On the course name to edit the course or to register students
+  {% if courses %}
+      <ul>
+      {% for course in courses %}
+          <li><a href="{% url 'sys_main:detail' course.course_id %}">{{ course.course_name }}</a></li>
+      {% endfor %}
+      </ul>
+  {% else %}
+      <p>No Courses are available.</p>
+  {% endif %}
+  <a href="{% url 'sys_main:addCourse' %}">ADD COURSE</a>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $("ul.nav.navbar-nav.navbar-right").css("display","inline");
+</script>
+{% endblock %}
+

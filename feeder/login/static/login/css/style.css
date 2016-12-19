@@ -1,0 +1,50 @@
+#user-image {
+	width : 30%;
+	height : 10%;
+	margin-left : 35%;
+	padding-bottom : 3%;
+}
+
+.user-field {
+	padding-bottom : 5%;
+	padding-left : 1%;
+}
+
+.user-table {
+	margin-left : 4%;
+}
+
+#panel-title {
+	text-align : center;
+}
+
+#create-account {
+	margin-left : 46%;
+}
+
+.navbar-nav > li > a {
+	padding-top:5px !important; 
+	padding-bottom:5px !important;
+}
+
+.navbar {
+	min-height:26px !important
+
+}
+
+#sign-card {
+	margin-top: 5%;
+}
+
+#register-table {
+	margin-left: 15%;
+}
+
+#register-card {
+	margin-left: 10%;
+	margin-top : 1%;
+}
+
+.error-message {
+	color : red;
+}
